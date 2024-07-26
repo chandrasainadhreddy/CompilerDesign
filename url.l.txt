@@ -1,20 +1,16 @@
 %{
-#include <stdio.h>
 %}
 
 %%
-(http|https|ftp)s?://[a-zA-Z0-9]+(\.[a-zA-Z]+)+(:[0-9]+)?(/.*)? {
-    printf("Valid URL: %s\n", yytext);
-}
-. {
-    printf("Invalid URL: %s\n", yytext);
-}
-%%
+((http)|(ftp))s?:\/\/[a-zA-Z0-9]{2}(\.[a-z]{2})+(\/[a-zA-Z0-9+=?]*)* {printf("\nURL InValid\n");}
+.+ {printf("\nURL valid\n");}
 
-int main() {
-    yylex();
-}
-int yywrap()
+%%
+int yywrap(){}
+
+void main()
 {
-return 1;
+	printf("\nEnter URL : ");
+	yylex();
+	printf("\n");
 }
